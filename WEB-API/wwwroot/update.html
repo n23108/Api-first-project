@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="update.js" defer></script>
+    <style>
+        body {
+            display: flex;
+            
+            height: 100vh;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .up {
+            display: flex;
+            flex-direction: column;
+            width: 40vw;
+            gap: 20px;
+        }
+        .update{
+            display:flex;
+            flex-direction:column;
+            gap:20px
+        }
+    </style>
+</head>
+<body>
+    <div class="update">
+        <input class="userName" placeholder="user name" />
+        <input class="pass" placeholder="password" type="password" />
+        <input class="finame" placeholder="first name" />
+        <input class="laname" placeholder="last name" />
+        <button class="up" onclick="Update()">update</button>
+    </div>
+</body>
+</html>

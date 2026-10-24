@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="home.js" defer></script>
+    <style>
+        body{
+            display:flex;
+
+            height:100vh;
+          gap:20px;
+            justify-content:center;
+
+        }
+        .register{
+            display:flex;
+            flex-direction:column;
+            width:40vw;
+            gap:20px;
+        }
+        .login {
+            display: flex;
+            flex-direction: column;
+            width: 40vw;
+            gap:20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="register">
+        <input class="uname" placeholder="user name" />
+        <input class="id" placeholder="password" type="password" />
+        <input class="fname" placeholder="first name" />
+        <input class="lname" placeholder="last name" />
+        <button class="reg" onclick="Register()">register</button>
+    </div>
+    <div class="login">
+        <input class="luname" placeholder="user name" />
+        <input class="lid" placeholder="password" type="password" />
+        <button class="log" onclick="LogIn()">log in</button>
+    </div>
+    <a href="update.html">לעדכון פרטי משתמש</a>
+
+</body>
+</html>

@@ -2,28 +2,33 @@
 <html>
 <head>
     <meta charset="utf-8" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
     <title></title>
     <script src="home.js" defer></script>
     <style>
-        body{
-            display:flex;
-
-            height:100vh;
-          gap:20px;
-            justify-content:center;
-
+        body {
+            display: flex;
+            height: 100vh;
+            gap: 20px;
+            justify-content: center;
         }
-        .register{
-            display:flex;
-            flex-direction:column;
-            width:40vw;
-            gap:20px;
+
+        .register {
+            display: flex;
+            flex-direction: column;
+            align-items:center;
+            width: 40vw;
+            gap: 20px;
         }
+
         .login {
             display: flex;
             flex-direction: column;
             width: 40vw;
-            gap:20px;
+            gap: 20px;
+        }
+        .passwordStrength{
+            padding:20px;
         }
     </style>
 </head>
@@ -33,6 +38,8 @@
         <input class="id" placeholder="password" type="password" />
         <input class="fname" placeholder="first name" />
         <input class="lname" placeholder="last name" />
+        <button class="isStrongPassword" onclick="CheckPassword()">check passwords quality</button>
+        <progress class="passwordStrength" value="0" max="4"></progress>
         <button class="reg" onclick="Register()">register</button>
     </div>
     <div class="login">

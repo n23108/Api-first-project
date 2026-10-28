@@ -2,7 +2,9 @@
 using Zxcvbn;
 namespace WEB_API.Controllers
 {
-    public class passwords : Controller
+    //fix: A controller class name ends with Controller, and types are written in PascalCase. The route stays api/passwords
+    //fix: The file is renamed to PasswordsController.cs, so it matches the class
+    public class PasswordsController : Controller
     {
         [Route("api/[controller]")]
         [HttpPost]

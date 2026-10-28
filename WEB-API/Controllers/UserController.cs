@@ -7,7 +7,9 @@ namespace WEB_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class User : ControllerBase
+    //fix: A controller class name ends with Controller. The route stays api/User
+    //fix: The file is renamed to UserController.cs, so it matches the class
+    public class UserController : ControllerBase
     {
         // GET: api/<User>
         [HttpGet]
@@ -33,7 +35,8 @@ namespace WEB_API.Controllers
             }
             return NoContent();
         }
-        static string FilePath = "User.txt";
+        //fix: The path never changes, so it can be readonly
+        static readonly string FilePath = "User.txt";
         // POST api/<User>
         [HttpPost]
         public ActionResult<Users> Post([FromBody] Users user)
@@ -46,6 +49,7 @@ namespace WEB_API.Controllers
             return CreatedAtAction(nameof(Get),new { id = user.id },user);
         }
 
+        //The assignment asks a wrong login to return NoContent() (204)
         [HttpPost("Login")]
 
         public ActionResult<UserLog> PostLog([FromBody] UserLog loginUser)
@@ -58,6 +62,7 @@ namespace WEB_API.Controllers
                     UserLog user =
                     JsonSerializer.Deserialize<UserLog>(currentUserInFile);
                     if (user.userName == loginUser.userName && user.password == loginUser.password)
+                        //This returns what the client sent (with the password). Return the user from the file instead, with its id and names
                         return Ok(loginUser);
                 }
             }
@@ -67,6 +72,7 @@ namespace WEB_API.Controllers
 
         // PUT api/<User>/5
         [HttpPut("{id}")]
+        //The assignment asks PUT to return Ok(): change void to IActionResult and return Ok() at the end
         public void Put(int id, [FromBody] Users userToUpdate)
         {
             string textToReplace = string.Empty;
@@ -79,11 +85,17 @@ namespace WEB_API.Controllers
                     Users user =
                     JsonSerializer.Deserialize<Users>(currentUserInFile);
                     if (user.id == id)
+                    {
                         textToReplace = currentUserInFile;
+                        //fix: Found- break
+                        break;
+                    }
                 }
             }
             if(textToReplace != string.Empty)
 {
+                //fix: Keep the id, otherwise the updated user is saved without it (User.txt has users with id 0)
+                userToUpdate.id = id;
                 string text = System.IO.File.ReadAllText(FilePath);
                 text = text.Replace(textToReplace,
                 JsonSerializer.Serialize(userToUpdate));

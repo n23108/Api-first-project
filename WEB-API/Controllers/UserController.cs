@@ -23,25 +23,30 @@ namespace WEB_API.Controllers
 
         // GET api/<User>/5
         [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "something";
-        }
-        [HttpPost]
+       public ActionResult<User> Get(int id)
+    {
+       var user = usersService.GetUserById(id);
+       if (user == null)
+      {
+        return NoContent();
+      }
+
+      return Ok(user);
+    }
+        
         public ActionResult<User> Post([FromBody] User user)
         {
             user=usersService.AddUser(user);
-            return CreatedAtAction(nameof(Get),new { id = user.id },user);
+            return CreatedAtAction(nameof(Get),new { id = user.Id },user);
         }
 
         [HttpPost("Login")]
 
-        public ActionResult<UserLog> PostLog([FromBody] UserLog loginUser)
-        {
+       public ActionResult<User> PostLog([FromBody] LoginUser loginUser){
             var user= usersService.GetUser(loginUser);
             if(user == null)
             {
-                return NotFound();
+                return NoContent();
             }
 
             return Ok(user);

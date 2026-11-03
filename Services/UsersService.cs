@@ -12,10 +12,14 @@ namespace Services
             return userRepository.AddUser(user);
         }
 
-        public User GetUser(UserLog logInUser)
+        public User GetUser(LoginUser logInUser)
         {
             
             return userRepository.GetUser(logInUser);
+        }
+        public User GetUserById(int id)
+        {
+            return userRepository.GetUserById(id);
         }
 
         public void UpdateUser(int id, User updateUserDetails)

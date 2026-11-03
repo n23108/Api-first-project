@@ -39,7 +39,7 @@ const LogIn = async () => {
         },
         body: JSON.stringify(postData)
     })
-    if (response.ok)
+    if (response.status === 200)
         alert("Login successful!");
     else
         alert("Login failed, user not found.")

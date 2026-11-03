@@ -1,3 +1,14 @@
 <Solution>
-  <Project Path="WEB-API/WEB-API.csproj" />
+  <Project Path="Entities/Entities.csproj" Id="81dab656-8af6-4baa-832c-2376e0f4351f" />
+  <Project Path="Repositories/Repositories.csproj" Id="588302bb-0a09-4251-92a2-4cd51d556ab9">
+    <BuildDependency Project="Entities/Entities.csproj" />
+  </Project>
+  <Project Path="services/services.csproj" Id="5cd95b0e-5247-482a-8fa7-6e1388638303">
+    <BuildDependency Project="Entities/Entities.csproj" />
+    <BuildDependency Project="Repositories/Repositories.csproj" />
+  </Project>
+  <Project Path="WEB-API/WEB-API.csproj">
+    <BuildDependency Project="Entities/Entities.csproj" />
+    <BuildDependency Project="services/services.csproj" />
+  </Project>
 </Solution>

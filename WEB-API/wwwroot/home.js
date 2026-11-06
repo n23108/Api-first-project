@@ -1,5 +1,4 @@
-﻿
-const Register = async () => {
+﻿const Register = async () => {
     const user = {
         userName: document.querySelector(".uname").value,
         password: document.querySelector(".id").value,
@@ -39,7 +38,7 @@ const LogIn = async () => {
         },
         body: JSON.stringify(postData)
     })
-    if (response.ok)
+    if (response.status === 200)
         alert("Login successful!");
     else
         alert("Login failed, user not found.")

@@ -5,7 +5,7 @@ namespace Services
     public interface IUsersService
     {
         User AddUser(User user);
-        User GetUser(UserLog logInUser);
+        User GetUser(LoginUser loginUser);
         void UpdateUser(int id, User updateUserDetails);
     }
 }

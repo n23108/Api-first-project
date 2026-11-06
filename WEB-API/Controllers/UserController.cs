@@ -1,65 +1,58 @@
 ﻿using Entities;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Services;
-using System.Text.Json;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WEB_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-
     public class UserController : ControllerBase
     {
         IUsersService _usersService;
+
         public UserController(IUsersService usersService)
         {
             _usersService = usersService;
         }
-        // GET: api/<User>
+
         [HttpGet]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/<User>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "something";
         }
+
         [HttpPost]
         public ActionResult<User> Post([FromBody] User user)
         {
-            user=_usersService.AddUser(user);
-            return CreatedAtAction(nameof(Get),new { id = user.id },user);
+            user = _usersService.AddUser(user);
+            return CreatedAtAction(nameof(Get), new { id = user.Id }, user);
         }
 
         [HttpPost("Login")]
-
-        public ActionResult<UserLog> PostLog([FromBody] UserLog loginUser)
+        public ActionResult<User> PostLog([FromBody] LoginUser loginUser)
         {
-            var user= _usersService.GetUser(loginUser);
-            if(user == null)
+            var user = _usersService.GetUser(loginUser);
+            if (user == null)
             {
-                return NotFound();
+                return NoContent();
             }
 
             return Ok(user);
         }
 
-        // PUT api/<User>/5
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] User userToUpdate)
         {
-          _usersService.UpdateUser(id, userToUpdate);
+            _usersService.UpdateUser(id, userToUpdate);
             return Ok();
         }
 
-        // DELETE api/<User>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

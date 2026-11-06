@@ -13,7 +13,11 @@ namespace WEB_API.Controllers
 
     public class UserController : ControllerBase
     {
-        UsersService usersService = new UsersService();
+        IUsersService _usersService;
+        public UserController(IUsersService usersService)
+        {
+            _usersService = usersService;
+        }
         // GET: api/<User>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -23,30 +27,25 @@ namespace WEB_API.Controllers
 
         // GET api/<User>/5
         [HttpGet("{id}")]
-       public ActionResult<User> Get(int id)
-    {
-       var user = usersService.GetUserById(id);
-       if (user == null)
-      {
-        return NoContent();
-      }
-
-      return Ok(user);
-    }
-        
+        public string Get(int id)
+        {
+            return "something";
+        }
+        [HttpPost]
         public ActionResult<User> Post([FromBody] User user)
         {
-            user=usersService.AddUser(user);
-            return CreatedAtAction(nameof(Get),new { id = user.Id },user);
+            user=_usersService.AddUser(user);
+            return CreatedAtAction(nameof(Get),new { id = user.id },user);
         }
 
         [HttpPost("Login")]
 
-       public ActionResult<User> PostLog([FromBody] LoginUser loginUser){
-            var user= usersService.GetUser(loginUser);
+        public ActionResult<UserLog> PostLog([FromBody] UserLog loginUser)
+        {
+            var user= _usersService.GetUser(loginUser);
             if(user == null)
             {
-                return NoContent();
+                return NotFound();
             }
 
             return Ok(user);
@@ -56,7 +55,7 @@ namespace WEB_API.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] User userToUpdate)
         {
-          usersService.UpdateUser(id, userToUpdate);
+          _usersService.UpdateUser(id, userToUpdate);
             return Ok();
         }
 

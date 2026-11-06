@@ -43,6 +43,4 @@
 {"userName":"s","firstName":"s","lastName":"s","password":"s","id":43}
 {"userName":"\u05D2","firstName":"\u05D2\u05D2","lastName":"\u05D2","password":"\u05D2","id":0}
 {"userName":"bhjk","firstName":"lonk","lastName":"lnkok","password":"jbhjhb","id":45}
-{"UserName":"n0548423108@gmail.com","FirstName":"\u05E0\u05E2\u05DE\u05D9","LastName":"\u05D4\u05DC\u05E4\u05E8\u05D9\u05DF","Password":"123456","Id":46}
-{"UserName":"n0548423108@gmail.com","FirstName":"\u05E0\u05E2\u05DE\u05D9","LastName":"\u05D4\u05DC\u05E4\u05E8\u05D9\u05DF","Password":"123456789","Id":47}
-{"UserName":"n0548423108@gmail.com","FirstName":"\u05E0\u05E2\u05DE\u05D9","LastName":"\u05D4\u05DC\u05E4\u05E8\u05D9\u05DF","Password":"\u05D4\u05DE\u0027\u05DF\u05E4\u05D1\u05DE\u05E7\u0027\u05E3\u05D5\u05DF\u05E64536278190","Id":48}
+{"userName":"\u05E7","firstName":"\u05E7","lastName":"\u05E7","password":"\u05E7","id":0}

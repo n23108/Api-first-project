@@ -5,16 +5,16 @@ namespace Entities
     public class User
     {
         [Required]
-        public string UserName { get; set; }
+        public string userName { get; set; }
         [Required]
 
-        public string FirstName { get; set; }
+        public string firstName { get; set; }
         [Required]
 
-        public string LastName { get; set; }
+        public string lastName { get; set; }
         [Required]
 
-        public string Password { get; set; }
-        public int Id { get; set; }
+        public string password { get; set; }
+        public int id { get; set; }
     }
 }

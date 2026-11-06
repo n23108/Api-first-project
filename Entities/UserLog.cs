@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    public class LoginUser
+    public class UserLog
     {
-        public string UserName { get; set; }
-        public string Password { get; set; }
+        public string userName { get; set; }
+        public string password { get; set; }
     }
 }

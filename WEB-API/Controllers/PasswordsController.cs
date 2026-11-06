@@ -5,7 +5,11 @@ namespace WEB_API.Controllers
 {
     public class PasswordsController : Controller
     {
-        private PasswordsService passwordsService = new PasswordsService();
+        private IPasswordsService _passwordsService;
+        public PasswordsController(IPasswordsService passwordsService)
+        {
+            _passwordsService = passwordsService;
+        }
 
         [Route("api/[controller]")]
         [HttpPost]
@@ -16,7 +20,7 @@ namespace WEB_API.Controllers
                 return BadRequest();
             }
 
-            var result = passwordsService.EvaluatePassword(password);
+            var result = _passwordsService.EvaluatePassword(password);
 
             return Ok(result);
         }

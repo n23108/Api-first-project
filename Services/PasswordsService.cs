@@ -7,38 +7,44 @@ using Zxcvbn;
 
 namespace Services
 {
+    public class PasswordResult
+    {
+        public bool IsValid { get; set; }
+        public int Score { get; set; }
+        public string Message { get; set; }
+    }
     public class PasswordsService : IPasswordsService
     {
-        public object EvaluatePassword(string password)
+        public PasswordResult EvaluatePassword(string password)
         {
             if (string.IsNullOrEmpty(password))
             {
-                return new
+                return new PasswordResult
                 {
-                    isValid = false,
-                    score = 0,
-                    message = "הסיסמה לא יכולה להיות ריקה"
+                    IsValid = false,
+                    Score = 0,
+                    Message = "הסיסמה לא יכולה להיות ריקה"
                 };
             }
 
-            var result = Core.EvaluatePassword(password); // Use Core directly
+            var result = Core.EvaluatePassword(password);
             int score = result.Score;
 
             if (score < 2)
             {
-                return new
+                return new PasswordResult
                 {
-                    isValid = false,
-                    score = score,
-                    message = "הסיסמה חלשה מדי"
+                    IsValid = false,
+                    Score = score,
+                    Message = "הסיסמה חלשה מדי"
                 };
             }
 
-            return new
+            return new PasswordResult
             {
-                isValid = true,
-                score = score,
-                message = "הסיסמה חזקה מספיק"
+                IsValid = true,
+                Score = score,
+                Message = "הסיסמה חזקה מספיק"
             };
         }
     }

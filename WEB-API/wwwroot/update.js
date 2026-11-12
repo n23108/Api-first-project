@@ -19,7 +19,10 @@ const Update = async () => {
         },
         body: JSON.stringify(userToUpdate)
     });
-    if (responsePut.ok) {
+    if (responsePut.status == 400) {
+        alert("סיסמה חלשה מידי אנא בחר אחת חזקה יותר");
+    }
+    else if (responsePut.ok) {
         sessionStorage.setItem("currentUser", JSON.stringify(userToUpdate));
         alert("The user has updated");
     }

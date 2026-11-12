@@ -2,6 +2,6 @@
 {
     public interface IPasswordsService
     {
-        object EvaluatePassword(string password);
+        PasswordResult EvaluatePassword(string password);
     }
 }

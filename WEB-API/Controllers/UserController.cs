@@ -9,10 +9,12 @@ namespace WEB_API.Controllers
     public class UserController : ControllerBase
     {
         IUsersService _usersService;
+        IPasswordsService _passwordsService;
 
-        public UserController(IUsersService usersService)
+        public UserController(IUsersService usersService, IPasswordsService passwordsService)
         {
             _usersService = usersService;
+            _passwordsService = passwordsService;
         }
 
         [HttpGet]
@@ -30,6 +32,12 @@ namespace WEB_API.Controllers
         [HttpPost]
         public ActionResult<User> Post([FromBody] User user)
         {
+            var result = _passwordsService.EvaluatePassword(user.Password);
+            if (!result.IsValid)
+            {
+                return BadRequest(result);
+            }
+
             user = _usersService.AddUser(user);
             return CreatedAtAction(nameof(Get), new { id = user.Id }, user);
         }
@@ -49,6 +57,12 @@ namespace WEB_API.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] User userToUpdate)
         {
+            var result = _passwordsService.EvaluatePassword(userToUpdate.Password);
+            if (!result.IsValid)
+            {
+                return BadRequest(result);
+            }
+
             _usersService.UpdateUser(id, userToUpdate);
             return Ok();
         }

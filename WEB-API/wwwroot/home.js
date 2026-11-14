@@ -1,4 +1,5 @@
-﻿const Register = async () => {
+﻿//In JavaScript, function names are camelCase, for example register instead of Register
+const Register = async () => {
 
     const user = {
         userName: document.querySelector(".uname").value,

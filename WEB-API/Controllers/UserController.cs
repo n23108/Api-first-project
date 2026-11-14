@@ -24,6 +24,7 @@ namespace WEB_API.Controllers
         }
 
         [HttpGet("{id}")]
+        //Why is GET by id not implemented? The assignment asks it to return the user with this id (or NoContent if there is none)
         public string Get(int id)
         {
             return "something";

@@ -4,6 +4,7 @@ document.querySelector(".userName").value = obj.userName
 document.querySelector(".pass").value=    obj.password
 document.querySelector(".finame").value = obj.firstName
 document.querySelector(".laname").value = obj.lastName
+//In JavaScript, function names are camelCase: update
 const Update = async () => {
     const userToUpdate = {
         userName: document.querySelector(".userName").value,

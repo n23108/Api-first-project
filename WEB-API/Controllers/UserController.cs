@@ -8,8 +8,8 @@ namespace WEB_API.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        IUsersService _usersService;
-        IPasswordsService _passwordsService;
+        private readonly IUsersService _usersService;
+        private readonly IPasswordsService _passwordsService;
 
         public UserController(IUsersService usersService, IPasswordsService passwordsService)
         {
@@ -30,7 +30,7 @@ namespace WEB_API.Controllers
         }
 
         [HttpPost]
-        public ActionResult<User> Post([FromBody] User user)
+        public async Task<ActionResult<User>> Post([FromBody] User user)
         {
             var result = _passwordsService.EvaluatePassword(user.Password);
             if (!result.IsValid)
@@ -38,14 +38,14 @@ namespace WEB_API.Controllers
                 return BadRequest(result);
             }
 
-            user = _usersService.AddUser(user);
+            await _usersService.AddUser(user);
             return CreatedAtAction(nameof(Get), new { id = user.Id }, user);
         }
 
         [HttpPost("Login")]
-        public ActionResult<User> PostLog([FromBody] LoginUser loginUser)
+        public async Task<ActionResult<User>> PostLog([FromBody] LoginUser loginUser)
         {
-            var user = _usersService.GetUser(loginUser);
+            var user = await _usersService.GetUser(loginUser);
             if (user == null)
             {
                 return NoContent();
@@ -55,7 +55,7 @@ namespace WEB_API.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] User userToUpdate)
+        public async Task<IActionResult> Put(int id, [FromBody] User userToUpdate)
         {
             var result = _passwordsService.EvaluatePassword(userToUpdate.Password);
             if (!result.IsValid)
@@ -63,7 +63,7 @@ namespace WEB_API.Controllers
                 return BadRequest(result);
             }
 
-            _usersService.UpdateUser(id, userToUpdate);
+            await _usersService.UpdateUser(id, userToUpdate);
             return Ok();
         }
 

@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Repositories;
 using Services;
-
+using Microsoft.Extensions.Configuration;
+using NLog.Web;
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -16,16 +17,18 @@ builder.Services.AddScoped<ICategoriesService, CategoriesService>();
 builder.Services.AddScoped<IOrdersService, OrdersService>();
 builder.Services.AddScoped<IOrdersRepository, OrdersRepository>();
 builder.Services.AddDbContext<ManagementDbContext>(options =>
-    options.UseSqlServer("Server=DESKTOP-SE665OL;Database=management;Trusted_Connection=True;TrustServerCertificate=True;"),
+    options.UseSqlServer(builder.Configuration.GetConnectionString("home")),
     ServiceLifetime.Transient);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Host.UseNLog();
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.Logger.LogInformation("Starting WEB-API in {Environment} environment", app.Environment.EnvironmentName);
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

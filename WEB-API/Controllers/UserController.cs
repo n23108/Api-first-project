@@ -10,11 +10,13 @@ namespace WEB_API.Controllers
     {
         private readonly IUsersService _usersService;
         private readonly IPasswordsService _passwordsService;
+        private readonly ILogger<UserController> _logger;
 
-        public UserController(IUsersService usersService, IPasswordsService passwordsService)
+        public UserController(IUsersService usersService, IPasswordsService passwordsService, ILogger<UserController> logger)
         {
             _usersService = usersService;
             _passwordsService = passwordsService;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -51,6 +53,7 @@ namespace WEB_API.Controllers
                 return NoContent();
             }
 
+            _logger.LogInformation($"User {user.UserName} logged in successfully. first name:{user.FirstName}, last name:{user.LastName}");
             return Ok(user);
         }
 

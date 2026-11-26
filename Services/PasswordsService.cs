@@ -7,6 +7,7 @@ using Zxcvbn;
 
 namespace Services
 {
+    //Each file is named after the type it declares: PasswordResult is declared in PasswordsService.cs, so it could go in its own file PasswordResult.cs
     public class PasswordResult
     {
         public bool IsValid { get; set; }
@@ -30,6 +31,7 @@ namespace Services
             var result = Core.EvaluatePassword(password);
             int score = result.Score;
 
+            //The assignment asks passwords with a score below 3 to be rejected: which score should be the limit here? Right now a score of 2 is accepted
             if (score < 2)
             {
                 return new PasswordResult

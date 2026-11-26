@@ -28,6 +28,7 @@ namespace WEB_API.Controllers
         [HttpGet("{id}")]
         public string Get(int id)
         {
+            //Why isn't it implemented? It should read the user with this id from the file and return it (or NoContent if it doesn't exist)
             return "something";
         }
 
